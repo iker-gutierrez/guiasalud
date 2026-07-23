@@ -1,6 +1,6 @@
-# SNS-1064: Clinical dataset for RAG-based QA
+# SNS1064: Clinical dataset for RAG-based QA
 
-SNS-1064 is a structured Spanish clinical dataset designed for Retrieval-Augmented Generation (RAG) and question answering (QA) systems. It is derived from six clinical practice guidelines from the Spanish National Health System.
+SNS1064 is a structured Spanish clinical dataset designed for Retrieval-Augmented Generation (RAG) and question answering (QA) systems. It is derived from six clinical practice guidelines from the Spanish National Health System.
 
 ## Dataset Overview
 
@@ -50,7 +50,7 @@ The dataset is built using a rule-based pipeline:
 
 ## Use Case
 
-SNS-1064 is designed for:
+SNS1064 is designed for:
 - RAG-based clinical QA.
 - evidence-grounded generation.
 - explainable NLP in healthcare.
