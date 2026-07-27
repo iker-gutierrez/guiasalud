@@ -27,12 +27,20 @@ The dataset explicitly separates answers from their supporting evidence, enablin
 
 ## Repository Contents
 
-- `dataset.csv` : full dataset.
-- `train_df.csv` : train split (80%).
-- `test_df.csv` : test split (20%).
+- `dataset.csv` : full dataset (train + dev + test).
+- `train_df.csv` : train split (876 samples).
+- `dev_df.csv` : dev split (63 samples).
+- `test_df.csv` : test split (125 samples).
 - `clinical_guidebooks_txt.zip` : source texts (TXT format).
-- `datasetting.ipynb` : dataset construction pipeline.
+- `datasetting.ipynb` : dataset construction pipeline (produces `dataset.csv`, unsplit).
 - `paper.pdf` : full description of dataset and building process.
+
+`train_df.csv`/`dev_df.csv`/`test_df.csv` additionally carry an `id` (stable
+per-record identifier) and `split` column, and `evidence` already includes
+`considerations` where present (merged, not a separate column) -- this is
+the exact split used for the experiments in the accompanying thesis, produced
+by `prepare_sns1064.py` in the [medical-rag-es-eu](https://github.com/iker-gutierrez/medical-rag-es-eu)
+repository, not by an 80/20 split of `dataset.csv` directly.
 
 ---
 
@@ -61,7 +69,7 @@ The separation between `judgement` and `evidence`/`considerations` supports fact
 
 ## Remarks
 
-- The test set is fully curated to ensure reliable RAG evaluation.
+- `dev_df.csv`/`test_df.csv` are being manually curated for reliable RAG evaluation; this is in progress.
 - Some noise is expected in the training set.
 
 
