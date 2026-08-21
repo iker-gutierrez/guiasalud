@@ -1,7 +1,9 @@
-# GuiaSalud: structured Spanish clinical QA dataset
+# GuiaSalud: structured clinical dataset for open-answer QA
 
-GuiaSalud is a structured Spanish clinical question-answering dataset built
+GuiaSalud is a structured clinical question-answering dataset built
 from six clinical practice guidelines of the Spanish National Health System.
+The dataset is built in two languages: Spanish (original) and Basque
+(machine-translated).
 It is intended for evidence-grounded clinical QA and retrieval-augmented
 generation research.
 
