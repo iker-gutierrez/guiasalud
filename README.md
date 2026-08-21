@@ -42,14 +42,25 @@ python scripts/datasetting_postcuration.py
 
 The pre-curation script writes its intermediate files to
 `data/interim/guiasalud/`. `manual_curation.py` creates `train.csv`,
-`dev.csv`, and `test.csv` from the corresponding `_precuration.csv` files
-where needed, keeps the pre-curation files unchanged, and rebuilds
-`dataset.csv`. `datasetting_postcuration.py` compares the two states and
-reports completeness and descriptive statistics.
+`dev.csv`, and `test.csv` inside that same directory, as copies of the
+corresponding `_precuration.csv` files where needed, keeps the pre-curation
+files unchanged, and rebuilds `dataset.csv` there.
+`datasetting_postcuration.py` compares the two states and reports
+completeness and descriptive statistics.
 
 The manual-curation and post-curation scripts accept `--data-dir`, allowing
 those audit steps to run in a separate working directory without altering the
 locally built dataset files.
+
+Publishing copies `data/interim/guiasalud/{train,dev,test,dataset}.csv` to
+the repository root, then converts the split CSVs to `es/{split}.jsonl`:
+
+```bash
+cp data/interim/guiasalud/{train,dev,test,dataset}.csv .
+python scripts/prepare_jsonl.py \
+    --train-df train.csv --dev-df dev.csv --test-df test.csv \
+    --output-dir es
+```
 
 ## Basque translation
 
