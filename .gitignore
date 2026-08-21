@@ -2,3 +2,11 @@ __pycache__/
 *.py[cod]
 .venv/
 data/interim/
+
+# Removed from GitHub, kept locally
+train.csv
+test.csv
+dev.csv
+datasetting.ipynb
+dataset.csv
+paper.pdf
