@@ -7,20 +7,20 @@ generation research.
 
 ## Dataset
 
-The repository publishes the final curated CSV files:
+This repository does not publish the dataset itself: it publishes the
+reproducible process that builds it. The curated CSVs (`dataset.csv`,
+`train.csv`, `dev.csv`, `test.csv`) and the `es`/`eu` JSON Lines files are
+all built and kept locally, not committed here. The published dataset lives
+on the [Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud),
+which downstream consumers should read from.
 
-| File | Contents |
-| --- | --- |
-| `dataset.csv` | Full structured dataset. |
-| `train.csv` | Training split. |
-| `dev.csv` | Development split. |
-| `test.csv` | Held-out test split. |
-| `clinical_guidebooks_txt.zip` | Source guideline text used by the construction pipeline. |
+`clinical_guidebooks_txt.zip`, the source guideline text the construction
+pipeline reads, is the one input file this repository does commit.
 
 Each record contains a stable identifier and structured fields for the source
 guidebook, clinical topic, question, optional refinement, clinical judgement,
-supporting evidence, and optional considerations. The split files are fixed;
-they should be used as published rather than recreated with a new random
+supporting evidence, and optional considerations. The train/dev/test split is
+fixed; it should be used as published rather than recreated with a new random
 split.
 
 ## Rebuild the dataset
@@ -49,7 +49,7 @@ reports completeness and descriptive statistics.
 
 The manual-curation and post-curation scripts accept `--data-dir`, allowing
 those audit steps to run in a separate working directory without altering the
-checked-in dataset files.
+locally built dataset files.
 
 ## Basque translation
 
