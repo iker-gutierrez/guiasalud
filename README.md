@@ -9,9 +9,10 @@ generation research.
 
 This repository does not publish the dataset itself: it publishes the
 reproducible process that builds it. The curated CSVs (`dataset.csv`,
-`train.csv`, `dev.csv`, `test.csv`) and the `es`/`eu` JSON Lines files are
-all built and kept locally, not committed here. The published dataset lives
-on the [Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud),
+`train.csv`, `dev.csv`, `test.csv`) and the `data/processed/es`/`eu` JSON
+Lines files are all built and kept locally, not committed here. The
+published dataset lives on the
+[Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud),
 which downstream consumers should read from.
 
 `clinical_guidebooks_txt.zip`, the source guideline text the construction
@@ -53,21 +54,22 @@ those audit steps to run in a separate working directory without altering the
 locally built dataset files.
 
 Publishing copies `data/interim/guiasalud/{train,dev,test,dataset}.csv` to
-the repository root, then converts the split CSVs to `es/{split}.jsonl`:
+the repository root, then converts the split CSVs to
+`data/processed/es/{split}.jsonl`:
 
 ```bash
 cp data/interim/guiasalud/{train,dev,test,dataset}.csv .
 python scripts/prepare_jsonl.py \
     --train-df train.csv --dev-df dev.csv --test-df test.csv \
-    --output-dir es
+    --output-dir data/processed/es
 ```
 
 ## Basque translation
 
-`es/` and `eu/` hold the same records as the CSV files above, in JSON Lines
-form, in Spanish and a machine-translated Basque version respectively. Built
-and kept locally during dataset creation (gitignored, not committed here),
-then published to the
+`data/processed/es/` and `data/processed/eu/` hold the same records as the
+CSV files above, in JSON Lines form, in Spanish and a machine-translated
+Basque version respectively. Built and kept locally during dataset creation
+(`data/processed/` is gitignored, not committed here), then published to the
 [Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud),
 which is the source of truth downstream consumers read from. The
 translation pipeline that produces `eu/` from `es/` is in

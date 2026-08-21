@@ -14,8 +14,8 @@ corpus.
 
 Usage:
   python scripts/translation/translate_to_basque.py \
-      --input  train.jsonl \
-      --output ../guiasalud_eu/train.jsonl
+      --input  data/processed/es/train.jsonl \
+      --output data/processed/eu/train.jsonl
 
 Adapted from med_rag_thesis's scripts/translate_to_basque.py (the downstream
 thesis repo this dataset was built for), trimmed to GuiaSalud only: the

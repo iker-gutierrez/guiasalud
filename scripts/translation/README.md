@@ -1,7 +1,8 @@
 # Basque translation pipeline
 
-Translates the Spanish `es/` GuiaSalud JSONL files into `eu/`, the Basque
-version published alongside `es/` on the [Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud).
+Translates the Spanish `data/processed/es/` GuiaSalud JSONL files into
+`data/processed/eu/`, the Basque version published alongside `es/` on the
+[Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud).
 
 Adapted from the downstream thesis repo
 ([`medical-rag-es-eu`](https://github.com/iker-gutierrez/evirag)) that
@@ -12,8 +13,8 @@ original pipeline also drove two other, unrelated datasets).
 
 ```bash
 python scripts/translation/translate_to_basque.py \
-    --input  es/train.jsonl es/dev.jsonl es/test.jsonl \
-    --output eu/train.jsonl eu/dev.jsonl eu/test.jsonl
+    --input  data/processed/es/train.jsonl data/processed/es/dev.jsonl data/processed/es/test.jsonl \
+    --output data/processed/eu/train.jsonl data/processed/eu/dev.jsonl data/processed/eu/test.jsonl
 
 python scripts/translation/check_translation_integrity.py
 ```
@@ -31,7 +32,7 @@ ordinary cross-language compactness.
 
 ```bash
 python scripts/translation/evaluate_translation_quality.py \
-    --source es/dev.jsonl --target eu/dev.jsonl \
+    --source data/processed/es/dev.jsonl --target data/processed/eu/dev.jsonl \
     --output reports/eu_dev_translation_quality.json
 ```
 
@@ -42,8 +43,8 @@ the length-ratio check alone cannot.
 
 ## Publishing
 
-`es/` and `eu/` are gitignored: they are built and kept locally during
-dataset creation, not committed to this repo. After regenerating or
+`data/processed/` is gitignored: `es/` and `eu/` are built and kept locally
+during dataset creation, not committed to this repo. After regenerating or
 patching them, push the updated files to the
 [Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud)
 (`es/{split}.jsonl`, `eu/{split}.jsonl`), which is the published source of

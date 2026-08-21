@@ -20,7 +20,7 @@ Usage:
       --train-df train.csv \\
       --dev-df   dev.csv \\
       --test-df  test.csv \\
-      --output-dir es
+      --output-dir data/processed/es
 """
 from __future__ import annotations
 
@@ -53,7 +53,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--train-df", required=True, help="train.csv")
     parser.add_argument("--dev-df", required=True, help="dev.csv")
     parser.add_argument("--test-df", required=True, help="test.csv")
-    parser.add_argument("--output-dir", required=True, help="Directory for all/train/dev/test files (es/).")
+    parser.add_argument("--output-dir", required=True, help="Directory for all/train/dev/test files (data/processed/es).")
     parser.add_argument("--source", default="GuiaSalud")
     return parser.parse_args()
 

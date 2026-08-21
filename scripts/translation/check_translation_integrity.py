@@ -31,7 +31,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-FLAGGED_FILE = ROOT / "manual_translation_needed" / "flagged.jsonl"
+PROCESSED = ROOT / "data" / "processed"
+FLAGGED_FILE = PROCESSED / "manual_translation_needed" / "flagged.jsonl"
 
 
 def load_flagged() -> set[tuple[str, str]]:
@@ -93,8 +94,8 @@ def main() -> None:
 
     for es_name, eu_name in PAIRS:
         for split in args.splits:
-            es_path = ROOT / es_name / f"{split}.jsonl"
-            eu_path = ROOT / eu_name / f"{split}.jsonl"
+            es_path = PROCESSED / es_name / f"{split}.jsonl"
+            eu_path = PROCESSED / eu_name / f"{split}.jsonl"
             if not (es_path.exists() and eu_path.exists()):
                 continue
             es = {json.loads(l)["id"]: json.loads(l) for l in es_path.open()}

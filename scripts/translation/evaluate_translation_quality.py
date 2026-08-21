@@ -20,8 +20,8 @@ here (e.g. a different account/environment), fall back with
 
 Usage:
   python scripts/translation/evaluate_translation_quality.py \\
-      --source es/dev.jsonl \\
-      --target eu/dev.jsonl \\
+      --source data/processed/es/dev.jsonl \\
+      --target data/processed/eu/dev.jsonl \\
       --output reports/eu_dev_translation_quality.json
 
 Adapted from med_rag_thesis's scripts/evaluate_translation_quality.py (the

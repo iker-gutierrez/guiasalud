@@ -18,5 +18,4 @@ scripts/translation/retranslate_*.py
 
 # es/eu JSONL data: built locally by scripts/translation/, published to
 # https://huggingface.co/datasets/ikergf/guiasalud, not duplicated in git.
-/es/
-/eu/
+data/processed/
