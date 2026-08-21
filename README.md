@@ -1,83 +1,64 @@
-# SNS1064: Clinical dataset for RAG-based QA
+# GuiaSalud: structured Spanish clinical QA dataset
 
-SNS1064 is a structured Spanish clinical dataset designed for Retrieval-Augmented Generation (RAG) and question answering (QA) systems. It is derived from six clinical practice guidelines from the Spanish National Health System.
+GuiaSalud is a structured Spanish clinical question-answering dataset built
+from six clinical practice guidelines of the Spanish National Health System.
+It is intended for evidence-grounded clinical QA and retrieval-augmented
+generation research.
 
-## Dataset Overview
+## Dataset
 
-- Samples: 1,064 QA instances.
-- Domains:
-  - Anxiety.
-  - Diabetes.
-  - Ictus management.
-  - Palliative care.
-  - Pedriatic palliative care.
-  - Secondary ictus prevention.
-- Structure:
-  - `guidebook` : source document.
-  - `topic` : clinical context.
-  - `question` : main question.
-  - `subquestion` : optional refinement.
-  - `judgement` : short clinical answer.
-  - `evidence` : supporting text.
-  - `considerations` : optional interpretation.
+The repository publishes the final curated CSV files:
 
-The dataset explicitly separates answers from their supporting evidence, enabling grounded and explainable QA.
+| File | Contents |
+| --- | --- |
+| `dataset.csv` | Full structured dataset. |
+| `train.csv` | Training split. |
+| `dev.csv` | Development split. |
+| `test.csv` | Held-out test split. |
+| `clinical_guidebooks_txt.zip` | Source guideline text used by the construction pipeline. |
 
----
+Each record contains a stable identifier and structured fields for the source
+guidebook, clinical topic, question, optional refinement, clinical judgement,
+supporting evidence, and optional considerations. The split files are fixed;
+they should be used as published rather than recreated with a new random
+split.
 
-## Repository Contents
+## Rebuild the dataset
 
-- `dataset.csv` : full dataset (train + dev + test).
-- `train_df.csv` : train split (876 samples).
-- `dev_df.csv` : dev split (63 samples).
-- `test_df.csv` : test split (125 samples).
-- `clinical_guidebooks_txt.zip` : source texts (TXT format).
-- `datasetting.ipynb` : dataset construction pipeline (produces `dataset.csv`, unsplit).
-- `paper.pdf` : full description of dataset and building process.
+The maintained construction pipeline is in `scripts/`. It preserves every
+pre-curation file as an audit baseline and applies reviewed corrections only
+to a separate curated copy.
 
-`train_df.csv`/`dev_df.csv`/`test_df.csv` additionally carry an `id` (stable
-per-record identifier) and `split` column, and `evidence` already includes
-`considerations` where present (merged, not a separate column) -- this is
-the exact split used for the experiments in the accompanying thesis, produced
-by `prepare_sns1064.py` in the [medical-rag-es-eu](https://github.com/iker-gutierrez/medical-rag-es-eu)
-repository, not by an 80/20 split of `dataset.csv` directly.
+```bash
+python -m pip install -r requirements.txt
+mkdir -p data/raw/clinical_guidebooks_txt
+unzip -oj clinical_guidebooks_txt.zip 'clinical_guidebooks_txt/*.txt' \
+  -d data/raw/clinical_guidebooks_txt
 
----
+python scripts/datasetting_precuration.py
+python scripts/manual_curation.py
+python scripts/datasetting_postcuration.py
+```
 
-## Construction Pipeline
+The pre-curation script writes its intermediate files to
+`data/interim/guiasalud/`. `manual_curation.py` creates `train.csv`,
+`dev.csv`, and `test.csv` from the corresponding `_precuration.csv` files
+where needed, keeps the pre-curation files unchanged, and rebuilds
+`dataset.csv`. `datasetting_postcuration.py` compares the two states and
+reports completeness and descriptive statistics.
 
-The dataset is built using a rule-based pipeline:
+The manual-curation and post-curation scripts accept `--data-dir`, allowing
+those audit steps to run in a separate working directory without altering the
+checked-in dataset files.
 
-1. PDF → TXT conversion.
-2. Text cleaning (whitespace and bullet removal).
-3. Regex-based text segmentation.
-4. Sample filtering (removal of non-informative placeholders).
-5. Manual curation (entire test set, partial training set).
+## Relationship to eviRAG
 
----
+This repository owns dataset construction and the published fixed split.
+The retrieval, generation, evaluation, and final experimental predictions
+are maintained separately in
+[`medical-rag-es-eu`](https://github.com/iker-gutierrez/medical-rag-es-eu).
 
-## Use Case
+## License and contact
 
-SNS1064 is designed for:
-- RAG-based clinical QA.
-- evidence-grounded generation.
-- explainable NLP in healthcare.
-
-The separation between `judgement` and `evidence`/`considerations` supports factuality, explainability, and traceability, which are essential in high-stakes domains such as healthcare.
-
----
-
-## Remarks
-
-- `dev_df.csv`/`test_df.csv` are being manually curated for reliable RAG evaluation; this is in progress.
-- Some noise is expected in the training set.
-
-
----
-
-## Contact
-
-Iker Gutierrez Fandiño  
-University of the Basque Country (EHU)  
-igutierrez134@ikasle.ehu.eus
-
+See [LICENSE](LICENSE). For questions, contact Iker Gutierrez Fandiño at
+igutierrez134@ikasle.ehu.eus.
