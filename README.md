@@ -51,12 +51,21 @@ The manual-curation and post-curation scripts accept `--data-dir`, allowing
 those audit steps to run in a separate working directory without altering the
 checked-in dataset files.
 
+## Basque translation
+
+`es/` and `eu/` hold the same records as the CSV files above, in JSON Lines
+form, in Spanish and a machine-translated Basque version respectively. These
+are the files published to the
+[Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud).
+The translation pipeline that produces `eu/` from `es/` is in
+`scripts/translation/`, see its own README for details.
+
 ## Relationship to eviRAG
 
 This repository owns dataset construction and the published fixed split.
 The retrieval, generation, evaluation, and final experimental predictions
 are maintained separately in
-[`medical-rag-es-eu`](https://github.com/iker-gutierrez/medical-rag-es-eu).
+[`evirag`](https://github.com/iker-gutierrez/evirag).
 
 ## License and contact
 

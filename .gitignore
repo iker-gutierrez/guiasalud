@@ -10,3 +10,8 @@ dev.csv
 datasetting.ipynb
 dataset.csv
 paper.pdf
+
+# One-off retranslation patch scripts, superseded by fixes already merged
+# into scripts/translation/translate_to_basque.py: not part of the
+# maintained pipeline, kept out of git if regenerated locally.
+scripts/translation/retranslate_*.py
