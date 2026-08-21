@@ -15,3 +15,8 @@ paper.pdf
 # into scripts/translation/translate_to_basque.py: not part of the
 # maintained pipeline, kept out of git if regenerated locally.
 scripts/translation/retranslate_*.py
+
+# es/eu JSONL data: built locally by scripts/translation/, published to
+# https://huggingface.co/datasets/ikergf/guiasalud, not duplicated in git.
+/es/
+/eu/

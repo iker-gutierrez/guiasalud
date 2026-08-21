@@ -42,8 +42,9 @@ the length-ratio check alone cannot.
 
 ## Publishing
 
-The `es/` and `eu/` JSONL files in this repo are the source of truth. After
-regenerating or patching them, push the updated files to the
+`es/` and `eu/` are gitignored: they are built and kept locally during
+dataset creation, not committed to this repo. After regenerating or
+patching them, push the updated files to the
 [Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud)
-(`es/{split}.jsonl`, `eu/{split}.jsonl`) so downstream consumers, including
-`medical-rag-es-eu`, pick up the change.
+(`es/{split}.jsonl`, `eu/{split}.jsonl`), which is the published source of
+truth downstream consumers, including `evirag`, read from.

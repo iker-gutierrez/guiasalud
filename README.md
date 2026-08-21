@@ -54,10 +54,12 @@ checked-in dataset files.
 ## Basque translation
 
 `es/` and `eu/` hold the same records as the CSV files above, in JSON Lines
-form, in Spanish and a machine-translated Basque version respectively. These
-are the files published to the
-[Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud).
-The translation pipeline that produces `eu/` from `es/` is in
+form, in Spanish and a machine-translated Basque version respectively. Built
+and kept locally during dataset creation (gitignored, not committed here),
+then published to the
+[Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud),
+which is the source of truth downstream consumers read from. The
+translation pipeline that produces `eu/` from `es/` is in
 `scripts/translation/`, see its own README for details.
 
 ## Relationship to eviRAG
