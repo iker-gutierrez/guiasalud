@@ -82,7 +82,10 @@ The retrieval, generation, evaluation, and final experimental predictions
 are maintained separately in
 [`evirag`](https://github.com/iker-gutierrez/evirag).
 
-## License and contact
+## License
 
-See [LICENSE](LICENSE). For questions, contact Iker Gutierrez Fandiño at
-igutierrez134@ikasle.ehu.eus.
+[Creative Commons Attribution-NonCommercial 4.0 International Public License](LICENSE). 
+
+## Contact
+
+For questions, contact Iker Gutierrez Fandiño at ikergutierrezfandino@gmail.com.
