@@ -77,12 +77,12 @@ which is the source of truth downstream consumers read from. The
 translation pipeline that produces `eu/` from `es/` is in
 `scripts/translation/`, see its own README for details.
 
-## Relationship to eviRAG
+## Relationship to EviMedRAG
 
 This repository owns dataset construction and the published fixed split.
 The retrieval, generation, evaluation, and final experimental predictions
 are maintained separately in
-[`evirag`](https://github.com/iker-gutierrez/evirag).
+[`EviMedRAG`](https://github.com/iker-gutierrez/evimedrag).
 
 ## License
 
