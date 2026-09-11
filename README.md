@@ -80,7 +80,7 @@ translation pipeline that produces `eu/` from `es/` is in
 As an automatic check beyond translation-integrity validation, the
 reference-free `Unbabel/wmt22-cometkiwi-da` quality-estimation model was
 applied to every Spanish--Basque `query`, `short_answer`, and
-`justification` pair:
+`justification` field:
 
 | Split | n | COMET-QE (mean ± SD) |
 | --- | ---: | ---: |
