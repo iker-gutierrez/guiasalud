@@ -77,6 +77,21 @@ which is the source of truth downstream consumers read from. The
 translation pipeline that produces `eu/` from `es/` is in
 `scripts/translation/`, see its own README for details.
 
+As an automatic check beyond translation-integrity validation, the
+reference-free `Unbabel/wmt22-cometkiwi-da` quality-estimation model was
+applied to every Spanish--Basque `query`, `short_answer`, and
+`justification` pair:
+
+| Split | n | COMET-QE (mean ± SD) |
+| --- | ---: | ---: |
+| Train | 2,193 | 0.766 ± 0.136 |
+| Development | 189 | 0.787 ± 0.124 |
+| Test | 375 | 0.770 ± 0.131 |
+| Combined | 2,757 | 0.768 ± 0.135 |
+
+This is an automatic estimate, not a substitute for human assessment of
+medical translation quality.
+
 ## Relationship to MeviRAG
 
 This repository owns dataset construction and the published fixed split.

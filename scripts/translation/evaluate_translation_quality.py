@@ -127,6 +127,37 @@ def load_qe_model(model_name: str, gpus: int):
 
     checkpoint_path = download_model(model_name)
     model = load_from_checkpoint(checkpoint_path)
+
+    # COMET 2.2.x expects a legacy tokenizer method that recent Transformers
+    # releases removed from XLMRobertaTokenizer. The special-token convention
+    # is unchanged, so restore only this small compatibility surface.
+    tokenizer = model.encoder.tokenizer
+    if not hasattr(tokenizer, "build_inputs_with_special_tokens"):
+        def build_inputs_with_special_tokens(token_ids_0, token_ids_1=None):
+            cls = [tokenizer.cls_token_id]
+            sep = [tokenizer.sep_token_id]
+            if token_ids_1 is None:
+                return cls + list(token_ids_0) + sep
+            return cls + list(token_ids_0) + sep + sep + list(token_ids_1) + sep
+
+        tokenizer.build_inputs_with_special_tokens = build_inputs_with_special_tokens
+
+    # Transformers 5 omits XLM-R's historical None pooler slot when returning
+    # a tuple. COMET 2.2.x still unpacks that legacy three-item tuple.
+    encoder_forward = model.encoder.model.forward
+
+    def forward_with_legacy_pooler(*args, **kwargs):
+        output = encoder_forward(*args, **kwargs)
+        if (
+            kwargs.get("return_dict") is False
+            and kwargs.get("output_hidden_states") is True
+            and isinstance(output, tuple)
+            and len(output) == 2
+        ):
+            return (output[0], None, output[1])
+        return output
+
+    model.encoder.model.forward = forward_with_legacy_pooler
     return model
 
 
