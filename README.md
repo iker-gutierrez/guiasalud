@@ -83,7 +83,7 @@ applied to every Spanish--Basque `query`, `short_answer`, and
 `justification` field:
 
 | Split | n | COMET-QE (mean ± SD) |
-| --- | ---: | ---: |
+| :--- | :---: | :---: |
 | Train | 2,193 | 0.766 ± 0.136 |
 | Development | 189 | 0.787 ± 0.124 |
 | Test | 375 | 0.770 ± 0.131 |
