@@ -1,7 +1,8 @@
 # GuiaSalud: structured clinical dataset for open-answer QA
 
-GuiaSalud is a structured clinical question-answering dataset built
-from six clinical practice guidelines of the Spanish National Health System.
+GuiaSalud is an open-answer medical question-answering dataset built from six
+Spanish clinical practice guidebooks published by GuíaSalud (an organism that belongs to the Spanish Ministry of Health
+/ Ministerio de Sanidad).
 The dataset is built in two languages: Spanish (original) and Basque
 (machine-translated).
 It is intended for evidence-grounded clinical QA and retrieval-augmented
@@ -13,9 +14,9 @@ This repository does not publish the dataset itself: it publishes the
 reproducible process that builds it. The curated CSVs (`dataset.csv`,
 `train.csv`, `dev.csv`, `test.csv`) and the `data/processed/es`/`eu` JSON
 Lines files are all built and kept locally, not committed here. The
-published dataset lives on the
-[Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud),
-which downstream consumers should read from.
+published dataset is available on Hugging Face:
+[https://huggingface.co/datasets/ikergf/guiasalud](https://huggingface.co/datasets/ikergf/guiasalud).
+Downstream consumers should read it from there.
 
 `clinical_guidebooks_txt.zip`, the source guideline text the construction
 pipeline reads, is the one input file this repository does commit.
@@ -71,10 +72,11 @@ python scripts/prepare_jsonl.py \
 `data/processed/es/` and `data/processed/eu/` hold the same records as the
 CSV files above, in JSON Lines form, in Spanish and a machine-translated
 Basque version respectively. Built and kept locally during dataset creation
-(`data/processed/` is gitignored, not committed here), then published to the
-[Hugging Face dataset](https://huggingface.co/datasets/ikergf/guiasalud),
-which is the source of truth downstream consumers read from. The
-translation pipeline that produces `eu/` from `es/` is in
+(`data/processed/` is gitignored, not committed here), then published on
+Hugging Face:
+[https://huggingface.co/datasets/ikergf/guiasalud](https://huggingface.co/datasets/ikergf/guiasalud).
+This published dataset is the source of truth downstream consumers read from.
+The translation pipeline that produces `eu/` from `es/` is in
 `scripts/translation/`, see its own README for details.
 
 As an automatic check beyond translation-integrity validation, the
@@ -96,8 +98,8 @@ medical translation quality.
 
 This repository owns dataset construction and the published fixed split.
 The retrieval, generation, evaluation, and final experimental predictions
-are maintained separately in
-[`MeviRAG`](https://github.com/iker-gutierrez/mevirag).
+are maintained separately in the MeviRAG GitHub repository:
+[https://github.com/iker-gutierrez/mevirag](https://github.com/iker-gutierrez/mevirag).
 
 ## License
 
