@@ -1,4 +1,4 @@
-# GuiaSalud: structured clinical dataset for open-answer QA
+# GuiaSalud: structured clinical dataset for evidence-grounded open-answer QA
 
 GuiaSalud is an open-answer medical question-answering dataset built from six
 Spanish clinical practice guidebooks published by GuíaSalud (an organism that belongs to the Spanish Ministry of Health
