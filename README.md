@@ -8,6 +8,17 @@ The dataset is built in two languages: Spanish (original) and Basque
 It is intended for evidence-grounded clinical QA and retrieval-augmented
 generation research.
 
+## Dataset at a glance
+
+| Property | Value |
+| :--- | :--- |
+| Instances | 919 |
+| Splits | 731 train / 63 development / 125 test |
+| Languages | Spanish (original) and Basque (machine-translated) |
+| Sources | Six Spanish clinical practice guidebooks |
+| Task | Evidence-grounded open-answer medical QA |
+| Structure | Question, short judgement, supporting evidence, and optional considerations |
+
 ## Dataset
 
 This repository does not publish the dataset itself: it publishes the
@@ -18,10 +29,19 @@ published dataset is available on Hugging Face:
 [https://huggingface.co/datasets/ikergf/guiasalud](https://huggingface.co/datasets/ikergf/guiasalud).
 Downstream consumers should read it from there.
 
+Load either language as a separate configuration:
+
+```python
+from datasets import load_dataset
+
+spanish = load_dataset("ikergf/guiasalud", "es")
+basque = load_dataset("ikergf/guiasalud", "eu")
+```
+
 `clinical_guidebooks_txt.zip`, the source guideline text the construction
 pipeline reads, is the one input file this repository does commit.
 
-Each record contains a stable identifier and structured fields for the source
+Each instance contains a stable identifier and structured fields for the source
 guidebook, clinical topic, question, optional refinement, clinical judgement,
 supporting evidence, and optional considerations. The train/dev/test split is
 fixed; it should be used as published rather than recreated with a new random
@@ -56,8 +76,9 @@ The manual-curation and post-curation scripts accept `--data-dir`, allowing
 those audit steps to run in a separate working directory without altering the
 locally built dataset files.
 
-Publishing copies `data/interim/guiasalud/{train,dev,test,dataset}.csv` to
-the repository root, then converts the split CSVs to
+To prepare the dataset for publication, copy
+`data/interim/guiasalud/{train,dev,test,dataset}.csv` to the repository root,
+then convert the split CSVs to
 `data/processed/es/{split}.jsonl`:
 
 ```bash
@@ -71,18 +92,19 @@ python scripts/prepare_jsonl.py \
 
 `data/processed/es/` and `data/processed/eu/` hold the same records as the
 CSV files above, in JSON Lines form, in Spanish and a machine-translated
-Basque version respectively. Built and kept locally during dataset creation
-(`data/processed/` is gitignored, not committed here), then published on
-Hugging Face:
-[https://huggingface.co/datasets/ikergf/guiasalud](https://huggingface.co/datasets/ikergf/guiasalud).
-This published dataset is the source of truth downstream consumers read from.
-The translation pipeline that produces `eu/` from `es/` is in
-`scripts/translation/`, see its own README for details.
+Basque version respectively. These files are built and kept locally during
+dataset creation (`data/processed/` is gitignored, not committed here) and then
+published in the Hugging Face dataset linked above, which is the source of
+truth downstream consumers read from. The translation pipeline that produces
+`eu/` from `es/` is documented in
+[scripts/translation/README.md](scripts/translation/README.md).
 
 As an automatic check beyond translation-integrity validation, the
 reference-free `Unbabel/wmt22-cometkiwi-da` quality-estimation model was
-applied to every Spanish--Basque `query`, `short_answer`, and
-`justification` field:
+applied to three normalized composite fields for every Spanish--Basque
+instance: `query` combines the native topic, subtopic, question, and focus;
+`short_answer` corresponds to the judgement; and `justification` combines the
+evidence and considerations.
 
 | Split | n | COMET-QE (mean ± SD) |
 | :--- | :---: | :---: |
@@ -100,6 +122,21 @@ This repository owns dataset construction and the published fixed split.
 The retrieval, generation, evaluation, and final experimental predictions
 are maintained separately in the MeviRAG GitHub repository:
 [https://github.com/iker-gutierrez/mevirag](https://github.com/iker-gutierrez/mevirag).
+
+## Citation
+
+If you use this dataset, please cite the Master’s thesis that introduces
+GuiaSalud and describes its construction, validation, and use in MeviRAG:
+
+```bibtex
+@mastersthesis{gutierrezfandino2026mevirag,
+  author = {Gutierrez Fandiño, Iker},
+  title  = {{GuiaSalud Dataset and MeviRAG}: Towards Evidence-Grounded Medical QA in Spanish and Basque},
+  school = {University of the Basque Country (EHU)},
+  year   = {2026},
+  type   = {Master's thesis}
+}
+```
 
 ## License
 
