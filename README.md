@@ -27,7 +27,7 @@ supporting evidence, and optional considerations. The train/dev/test split is
 fixed; it should be used as published rather than recreated with a new random
 split.
 
-## Rebuild the dataset
+## Construction of the dataset
 
 The maintained construction pipeline is in `scripts/`. It preserves every
 pre-curation file as an audit baseline and applies reviewed corrections only
