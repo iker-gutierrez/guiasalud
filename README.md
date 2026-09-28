@@ -101,7 +101,7 @@ truth downstream consumers read from. The translation pipeline that produces
 
 As an automatic check beyond translation-integrity validation, the
 reference-free `Unbabel/wmt22-cometkiwi-da` quality-estimation model was
-applied to three normalized composite fields for every Spanish--Basque
+applied to three normalized composite fields for every Spanish-Basque
 instance. The `query` field combines the native topic, subtopic, question, and
 focus. The `short_answer` field corresponds to the judgement. The
 `justification` field combines the evidence and considerations.
