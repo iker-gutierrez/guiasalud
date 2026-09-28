@@ -44,7 +44,7 @@ pipeline reads, is the one input file this repository does commit.
 Each instance contains a stable identifier and structured fields for the source
 guidebook, clinical topic, question, optional refinement, clinical judgement,
 supporting evidence, and optional considerations. The train/dev/test split is
-fixed; it should be used as published rather than recreated with a new random
+fixed and should be used as published rather than recreated with a new random
 split.
 
 ## Construction of the dataset
@@ -102,9 +102,9 @@ truth downstream consumers read from. The translation pipeline that produces
 As an automatic check beyond translation-integrity validation, the
 reference-free `Unbabel/wmt22-cometkiwi-da` quality-estimation model was
 applied to three normalized composite fields for every Spanish--Basque
-instance: `query` combines the native topic, subtopic, question, and focus;
-`short_answer` corresponds to the judgement; and `justification` combines the
-evidence and considerations.
+instance. The `query` field combines the native topic, subtopic, question, and
+focus. The `short_answer` field corresponds to the judgement. The
+`justification` field combines the evidence and considerations.
 
 | Split | n | COMET-QE (mean ± SD) |
 | :--- | :---: | :---: |
