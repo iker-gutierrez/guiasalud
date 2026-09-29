@@ -47,6 +47,27 @@ supporting evidence, and optional considerations. The train/dev/test split is
 fixed and should be used as published rather than recreated with a new random
 split.
 
+## Repository layout
+
+```text
+.
+├── clinical_guidebooks_txt.zip     # Source guideline text
+├── scripts/
+│   ├── datasetting_precuration.py  # Extract and filter candidate instances
+│   ├── manual_curation.py          # Apply reviewed textual corrections
+│   ├── datasetting_postcuration.py # Validate and describe the curated dataset
+│   ├── prepare_jsonl.py            # Convert the published splits to JSON Lines
+│   └── translation/                # Basque translation and quality checks
+├── data/
+│   ├── interim/guiasalud/          # Generated CSV datasets (not tracked)
+│   └── processed/
+│       ├── es/                     # Generated Spanish JSONL splits (not tracked)
+│       └── eu/                     # Generated Basque JSONL splits (not tracked)
+├── requirements.txt                
+├── LICENSE
+└── README.md
+```
+
 ## Construction of the dataset
 
 The maintained construction pipeline is in `scripts/`. It preserves every
