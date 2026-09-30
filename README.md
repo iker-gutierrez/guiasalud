@@ -165,7 +165,7 @@ GuiaSalud and describes its construction, validation, and use in MeviRAG:
 }
 ```
 
-Note: The Master's thesis has been uploaded to ADDI
+Note: The Master's thesis was uploaded to ADDI
 ([https://addi.ehu.eus](https://addi.ehu.eus)) and will soon be openly
 available there.
 
