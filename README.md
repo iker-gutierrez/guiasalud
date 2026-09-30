@@ -47,6 +47,21 @@ supporting evidence, and optional considerations. The train/dev/test split is
 fixed and should be used as published rather than recreated with a new random
 split.
 
+### Dataset schema
+
+| # | Field | Description |
+|---:|:---|:---|
+| 0 | `id` | Unique sample identifier |
+| 1 | `split` | Assigned train/dev/test partition |
+| 2 | `guidebook` | File name of the guidebook |
+| 3 | `topic` | Medical topic providing context |
+| 4 | `subtopic` | Refinement of the topic (optional) |
+| 5 | `question` | Main medical question |
+| 6 | `focus` | Refinement of the question (optional) |
+| 7 | `judgement` | Short answer to the question |
+| 8 | `evidence` | Supporting scientific evidence |
+| 9 | `considerations` | Interpretative notes (optional) |
+
 ## Repository layout
 
 ```text
